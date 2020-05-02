@@ -1,15 +1,22 @@
-package com.ysachot.donsang.dto;
+package com.ysachot.donsang.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Getter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
-@Getter
-public class CsvBean {
+@Data
+public class LocationEntity {
 
+    @Id
+    private Long locationId;
     private String locationAddress1;
     private String locationAddress2;
     private String locationCity;
@@ -19,7 +26,6 @@ public class CsvBean {
     private boolean locationGivePlasma;
     private boolean locationGivePlatelet;
     private String locationGroupCode;
-    private Long locationId;
     private double locationLatitude;
     private double locationLongitude;
     private String locationName;
@@ -32,16 +38,5 @@ public class CsvBean {
     private String locationInfos;
     private String locationDebutInfos;
     private String locationFinInfos;
-    private LocalDate collectionDate;
-    private String collectionGroupCode;
-    private Long collectionId;
-    private String collectionIsPublic;
-    private String collectionLpCode;
-    private LocalTime collectionMorningEndTime;
-    private LocalTime collectionMorningStartTime;
-    private LocalTime collectionAfternoonEndTime;
-    private LocalTime collectionAfternoonStartTime;
-    private String collectionRegionCode;
-    private String collectionNature;
 
 }
