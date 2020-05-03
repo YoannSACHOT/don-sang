@@ -69,14 +69,4 @@
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>local</id>
-			<properties>
-				<csvFileLocation>F:\don-sang-csv\</csvFileLocation>
-				<csvFileName>collections.csv</csvFileName>
-				<csvFileFullPath>${csvFileLocation}${csvFileName}</csvFileFullPath>
-			</properties>
-		</profile>
-	</profiles>
 </project>

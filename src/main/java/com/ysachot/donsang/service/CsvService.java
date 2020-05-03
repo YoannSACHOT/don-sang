@@ -15,10 +15,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.nio.file.attribute.BasicFileAttributes;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +33,7 @@ public class CsvService {
     private String csvFileDownloadLocation;
 
     public List<CsvBean> getBeansFromCsv() throws IOException {
-        updateCSVFile();
+        log.info("Extracting data...");
         File file = new File(csvFileFullPath);
         List<CsvBean> csvBeans = new ArrayList<>();
 
@@ -50,7 +48,10 @@ public class CsvService {
                 } while (myline != null);
                 csvBeans = splitString(fullFile.toString(), 33);
             }
+        }else{
+            log.error("File is absent or un readable. Should be at {}",csvFileFullPath);
         }
+        log.info("Data extracted.");
         return csvBeans;
     }
 
