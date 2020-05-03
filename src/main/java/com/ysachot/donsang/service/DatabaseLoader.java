@@ -1,30 +1,29 @@
 package com.ysachot.donsang.service;
 
-import com.ysachot.donsang.dto.CsvBean;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.List;
 
 @Component
 @AllArgsConstructor
 @Slf4j
 public class DatabaseLoader implements CommandLineRunner {
 
-    private CsvService csvService;
-    private LocationCollectionService locationCollectionService;
+    private final CsvService csvService;
+    private final LocationCollectionService locationCollectionService;
 
     @Override
     public void run(String... args) throws IOException {
-        populateDB(csvService.getBeansFromCsv());
+        updateDb();
     }
 
-    public void populateDB(List<CsvBean> csvBeans){
-        for(CsvBean csvBean:csvBeans){
-            locationCollectionService.save(csvBean);
-        }
+    @Scheduled(cron="0 0/30 * * * *")
+    public void updateDb() throws IOException{
+        csvService.updateCSVFile();
+        locationCollectionService.populateDB(csvService.getBeansFromCsv());
     }
 }

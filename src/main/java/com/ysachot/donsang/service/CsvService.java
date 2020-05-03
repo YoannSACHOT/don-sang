@@ -55,19 +55,7 @@ public class CsvService {
     }
 
     public void updateCSVFile() throws IOException {
-        File file = new File(csvFileFullPath);
-        if(file.canRead()){
-            BasicFileAttributes attr = Files.readAttributes(file.toPath(), BasicFileAttributes.class);
-            if(attr.creationTime().toInstant().isBefore(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant())){
-                log.info("The CSV file is outdated, it will be updated.");
-                downloadFile();
-            }else{
-                log.info("CSV file is up to date.");
-            }
-        }else{
-            log.info("The CSV file doesn't exist, it will be downloaded.");
-            downloadFile();
-        }
+        downloadFile();
     }
 
     private void downloadFile() throws IOException {

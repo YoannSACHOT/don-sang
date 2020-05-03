@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -22,4 +24,11 @@ public class LocationCollectionService {
         locationRepository.saveAndFlush(beanToEntityConverter.getLocationEntity(csvBean));
     }
 
+    public void populateDB(List<CsvBean> csvBeans){
+        log.info("Updating DB...");
+        for(CsvBean csvBean:csvBeans){
+            save(csvBean);
+        }
+        log.info("DB updated.");
+    }
 }
